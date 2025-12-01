@@ -13,6 +13,7 @@ function PreviewPage() {
   const [email, setEmail] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadUrl, setUploadUrl] = useState(null);
+  const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
     if (location.state?.finalImage) {
@@ -31,6 +32,7 @@ function PreviewPage() {
 
       const res = await uploadFinalPhoto(finalImage);
       setUploadUrl(res.url);
+      setSessionId(res.sessionId || null); // 👈 store session id
 
       alert("Image uploaded successfully!");
     } catch (err) {
@@ -59,7 +61,7 @@ function PreviewPage() {
       return;
     }
     try {
-      await sendPhotoEmail(email.trim(), uploadUrl);
+      await sendPhotoEmail(email.trim(), uploadUrl, sessionId);
       alert("Photo sent to email successfully!");
     } catch (err) {
       console.error("Email error:", err.response?.data || err);
@@ -140,7 +142,9 @@ function PreviewPage() {
                   disabled={!finalImage || isUploading}
                   className="w-full bg-slate-900 text-white py-2.5 rounded-xl text-sm hover:bg-slate-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isUploading ? "Uploading..." : "Upload to Cloud (Cloudinary)"}
+                  {isUploading
+                    ? "Uploading..."
+                    : "Upload to Cloud (Cloudinary)"}
                 </button>
 
                 {uploadUrl && (
