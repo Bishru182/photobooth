@@ -4,7 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CapturePage from "./pages/CapturePage";
 import PreviewPage from "./pages/PreviewPage";
-import RequireAuth from "./components/auth/RequireAuth"; // 👈 new import
+import AdminPage from "./pages/AdminPage";
+import RequireAuth from "./components/auth/RequireAuth";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/capture" element={<CapturePage />} />
           <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
       </Routes>
     </div>

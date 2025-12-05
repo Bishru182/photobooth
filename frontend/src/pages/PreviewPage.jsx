@@ -32,7 +32,7 @@ function PreviewPage() {
 
       const res = await uploadFinalPhoto(finalImage);
       setUploadUrl(res.url);
-      setSessionId(res.sessionId || null); // 👈 store session id
+      setSessionId(res.sessionId || null); //store session id
 
       alert("Image uploaded successfully!");
     } catch (err) {
