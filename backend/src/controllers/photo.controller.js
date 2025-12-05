@@ -4,7 +4,7 @@ const PhotoSession = require("../models/PhotoSession");
 
 const uploadFinalPhoto = async (req, res) => {
   try {
-    const { image } = req.body;
+    const { image, userEmail } = req.body;
 
     if (!image) {
       return res.status(400).json({ message: "Image is required" });
@@ -20,17 +20,18 @@ const uploadFinalPhoto = async (req, res) => {
 
     console.log("Cloudinary upload success:", uploadResponse.secure_url);
 
-    // 1️⃣ Create a PhotoSession with empty emailSentTo
+    // Create a PhotoSession for this upload
     const session = await PhotoSession.create({
       imageUrl: uploadResponse.secure_url,
-      emailSentTo: "", // no email yet
+      capturedByEmail: userEmail || "",
+      emailSentTo: "",
     });
 
     return res.status(200).json({
       message: "Image uploaded successfully",
       url: uploadResponse.secure_url,
       public_id: uploadResponse.public_id,
-      sessionId: session._id, // 👈 send this to frontend
+      sessionId: session._id,
     });
   } catch (err) {
     console.error("Cloudinary upload error:", err);
@@ -53,18 +54,19 @@ const sendPhotoByEmail = async (req, res) => {
 
     console.log(`Sending photobooth image to ${email}: ${imageUrl}`);
 
-    // 1️⃣ Send the email
+    // Send the email
     await sendPhotoEmail(email, imageUrl);
 
-    // 2️⃣ If we have a sessionId, update that record
+    // Update existing session if sessionId is provided
     if (sessionId) {
       await PhotoSession.findByIdAndUpdate(sessionId, {
         emailSentTo: email,
       });
     } else {
-      // fallback: if no sessionId, create a new record (rare case)
+      // Fallback: create a new record if no sessionId
       await PhotoSession.create({
         imageUrl,
+        capturedByEmail: "",
         emailSentTo: email,
       });
     }
@@ -79,7 +81,22 @@ const sendPhotoByEmail = async (req, res) => {
   }
 };
 
+const getPhotoSessions = async (req, res) => {
+  try {
+    const sessions = await PhotoSession.find({}).sort({ createdAt: -1 }).lean();
+
+    return res.status(200).json(sessions);
+  } catch (err) {
+    console.error("Get photo sessions error:", err);
+    return res.status(500).json({
+      message: "Failed to fetch sessions",
+      error: err.message || "Unknown error",
+    });
+  }
+};
+
 module.exports = {
   uploadFinalPhoto,
   sendPhotoByEmail,
+  getPhotoSessions,
 };

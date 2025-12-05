@@ -6,13 +6,17 @@ const photoSessionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    capturedByEmail: {
+      type: String,
+      default: "",
+    },
     emailSentTo: {
       type: String,
-      default: "", // empty if no email yet
+      default: "",
     },
   },
   {
-    timestamps: true, // adds createdAt, updatedAt
+    timestamps: true, // createdAt, updatedAt
   }
 );
 

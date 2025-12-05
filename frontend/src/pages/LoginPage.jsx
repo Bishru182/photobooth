@@ -14,29 +14,29 @@ function LoginPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const res = await login({
-      email: formData.email,
-      password: formData.password,
-    });
+    try {
+      const res = await login({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    // Save token + user
-    localStorage.setItem("authToken", res.token);
-    localStorage.setItem("userName", res.user.name);
+      // Save token + user
+      localStorage.setItem("authToken", res.token);
+      localStorage.setItem("userName", res.user.name);
+      localStorage.setItem("userEmail", res.user.email);
 
-    // 👉 Redirect to Capture Page
-    navigate("/capture");
-  } catch (err) {
-    console.error(err);
-    alert(
-      err.response?.data?.message || "Failed to login. Please try again."
-    );
-  }
-};
-
+      
+      navigate("/capture");
+    } catch (err) {
+      console.error(err);
+      alert(
+        err.response?.data?.message || "Failed to login. Please try again."
+      );
+    }
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center">
