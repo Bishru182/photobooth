@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bishblue: #000a10;
+}
 
-/* optional body styling */
 body {
   background-color: #f1f5f9;
   color: #0f172a;
