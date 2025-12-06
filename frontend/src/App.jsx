@@ -12,7 +12,8 @@ function App() {
     <div className="min-h-screen bg-slate-100">
       <Routes>
         {/* Public routes */}
-        <Route path="/" element={<LandingPage />} />
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
