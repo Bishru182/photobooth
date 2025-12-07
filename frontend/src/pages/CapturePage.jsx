@@ -5,6 +5,7 @@ import FramePreview from "../components/photobooth/FramePreview";
 import CompositeFrame from "../components/photobooth/CompositeFrame";
 import Navbar from "../components/layout/Navbar";
 
+
 function CapturePage() {
   const navigate = useNavigate();
   const [photos, setPhotos] = useState([]);
@@ -49,7 +50,7 @@ function CapturePage() {
   const remaining = maxPhotos - photos.length;
 
   return (
-    <main className="min-h-screen bg-slate-100">
+    <main className="min-h-screen bg-bishblue">
       <Navbar />
 
       <div className="flex items-center justify-center px-4 py-10">
@@ -127,8 +128,8 @@ function CapturePage() {
 
               <p className="text-[11px] text-slate-400">
                 Tip: Make sure the faces are clearly visible in each photo. Once
-                all 3 are captured, we&apos;ll automatically place them into your
-                custom frame.
+                all 3 are captured, we&apos;ll automatically place them into
+                your custom frame.
               </p>
             </div>
           </div>
