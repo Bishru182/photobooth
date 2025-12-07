@@ -101,10 +101,10 @@ function PreviewPage() {
               <h1 className="text-2xl sm:text-3xl font-semibold text-slate-100">
                 Preview &amp; Share
               </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
+              {/* <p className="text-xs sm:text-sm text-slate-300 mt-1">
                 Your final framed photobooth image is ready to download, upload,
                 or share.
-              </p>
+              </p> */}
             </div>
             <button
               type="button"
@@ -121,7 +121,7 @@ function PreviewPage() {
               {finalImage ? (
                 <div className="border border-slate-100/60 rounded-2xl p-4 bg-white/5 shadow-sm">
                   <p className="text-xs text-slate-200 mb-3">
-                    Final Instagram Story frame
+                    Story frame
                   </p>
                   <img
                     src={finalImage}

@@ -48,8 +48,8 @@ function Navbar() {
               onClick={() => navigate("/capture")}
               className={`text-xs sm:text-sm px-3 py-1.5 text-white${
                 isCapturePage
-                  ? "bg-slate-900 text-white border-slate-900"
-                  : "text-slate-600 border-slate-300 hover:border-b"
+                  ? "bg-slate-100 text-white border-slate-100"
+                  : " border-slate-300 hover:border-b text-slate-100"
               } transition`}
             >
               Capture
