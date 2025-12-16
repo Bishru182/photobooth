@@ -40,11 +40,11 @@ function CompositeFrame({ photos, onReady }) {
         ctx.drawImage(frame, 0, 0, width, height);
 
         // -------- PHOTO LAYOUT (CONTAIN, no cropping) --------
-        const marginX = 10; // side padding
-        const marginYTop = 200; // header space for event name
+        const marginX = 5; // side padding
+        const marginYTop = 50; // header space for event name
         const slotWidth = width - marginX * 2; // 1080 - 160 = 920
-        const slotHeight = 440; // height of each photo slot
-        const gap = 70; // vertical spacing between slots
+        const slotHeight = 540; // height of each photo slot
+        const gap = 30; // vertical spacing between slots
 
         const images = [img1, img2, img3];
 
