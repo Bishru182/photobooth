@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
-  width: 1280,
-  height: 720,
+  width: 1920,
+  height: 1080,
   facingMode: "user",
 };
 
@@ -25,8 +25,8 @@ function CameraView({ onCapture, disabled }) {
           ref={webcamRef}
           audio={false}
           screenshotFormat="image/jpeg"
-          screenshotQuality={0.9}
-          screenshotWidth={1280} // force same width every time
+          screenshotQuality={1.0}
+          screenshotWidth={1920} // match canvas width
           videoConstraints={videoConstraints}
           className="w-full max-w-xl aspect-video object-cover"
         />
