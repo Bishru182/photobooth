@@ -23,10 +23,10 @@ function CompositeFrame({ photos, onReady }) {
           loadImage(frameImage),
         ]);
 
-        // Instagram story canvas: 1080 x 1920 (9:16)
+        // Updated canvas for 1440x2560 frame
         const canvas = document.createElement("canvas");
-        const width = 1080;
-        const height = 1920;
+        const width = 1440;
+        const height = 2560;
         canvas.width = width;
         canvas.height = height;
 
@@ -40,13 +40,16 @@ function CompositeFrame({ photos, onReady }) {
         ctx.drawImage(frame, 0, 0, width, height);
 
         // -------- PHOTO LAYOUT (CONTAIN, no cropping) --------
-        const marginX = 5; // side padding
-        const marginYTop = 50; // header space for event name
-        const slotWidth = width - marginX * 2; // 1080 - 160 = 920
-        const slotHeight = 540; // height of each photo slot
-        const gap = 30; // vertical spacing between slots
-
+        const marginX = 80; // side padding
+        const marginYTop = 10; // header space for event name/logo
+        const marginYBottom = 230; // footer space for logo
+        const gap = 10; // vertical spacing between slots
         const images = [img1, img2, img3];
+
+        // Calculate slot height to evenly distribute 3 photos
+        const availableHeight = height - marginYTop - marginYBottom - 2 * gap;
+        const slotHeight = availableHeight / 3;
+        const slotWidth = width - marginX * 2;
 
         images.forEach((img, index) => {
           const slotY = marginYTop + index * (slotHeight + gap);
